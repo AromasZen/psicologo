@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licenciado - Psicología Clínica | Tu espacio seguro</title>
+    <meta name="description"
+        content="Licenciado en Psicología. Terapia presencial y online. Encontrá un espacio seguro, empático y profesional para sanar y mejorar tu calidad de vida.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Supabase SDK & SweetAlert2 -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Prevenir el error 404 de favicon en la consola -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+
+<body>
+
+    <!-- Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <nav class="navbar glass-nav">
+        <div class="container nav-content">
+            <div class="logo">
+                <span class="logo-text">Lic. Martín Rossi</span>
+            </div>
+            <div class="nav-links">
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#testimonios">Testimonios</a>
+                <a href="#contacto" class="btn btn-outline">Contacto</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero container" id="inicio">
+        <div class="hero-content fade-in">
+            <span class="pre-title">Lic. Martín Rossi - Psicología Clínica</span>
+            <h1>Tu bienestar empieza hoy. Encontrá un espacio seguro para sanar.</h1>
+            <p class="subtitle">Te acompaño en tu proceso personal con calidez, empatía y profesionalismo. Sesiones
+                presenciales en Palermo, CABA y online para todo el país.</p>
+            <div class="hero-actions">
+                <button type="button" class="btn btn-primary btn-whatsapp fade-up" onclick="openBookingModal()">
+                    <i class="fas fa-calendar-check"></i> Reservá tu turno online
+                </button>
+                <p class="support-text">Respuesta rápida. Elegí tu horario en pocos minutos.</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item glass-card">
+                    <i class="fas fa-user-md"></i>
+                    <span>Atención Personalizada</span>
+                </div>
+                <div class="stat-item glass-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Espacio Seguro</span>
+                </div>
+                <div class="stat-item glass-card">
+                    <i class="fas fa-laptop-medical"></i>
+                    <span>Terapia Online</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image-wrapper fade-in" style="transition-delay: 200ms;">
+            <div class="image-glass-frame">
+                <img src="assets/hero.png" alt="Lic. en Psicología sonriendo en su consultorio" class="hero-image">
+            </div>
+        </div>
+    </header>
+
+    <!-- Sobre Mí Section -->
+    <section class="about container section-padding" id="sobre-mi">
+        <div class="about-grid">
+            <div class="about-image-wrapper fade-in">
+                <div class="image-glass-frame">
+                    <img src="assets/about.png" alt="Psicólogo trabajando en su consultorio" class="about-image">
+                </div>
+            </div>
+            <div class="about-content fade-in" style="transition-delay: 200ms;">
+                <h2>Sobre mí: ¿Quién te va a acompañar?</h2>
+                <p>¡Hola! Soy Martín Rossi, Licenciado en Psicología (M.N. 65432). Mi vocación es brindarte un
+                    espacio de escucha activa, libre de prejuicios y adaptado a lo que necesitás hoy.</p>
+                <p>Llevo más de 8 años ayudando a personas a encontrar herramientas para gestionar sus emociones,
+                    superar momentos de crisis y mejorar su calidad de vida. Entiendo que dar el primer paso y pedir
+                    ayuda no siempre es fácil, por eso mi objetivo es que te sientas cómodo/a y a salvo desde la primera
+                    sesión.</p>
+                <ul class="highlights">
+                    <li><i class="fas fa-check-circle"></i> Profesional matriculado y en constante formación.</li>
+                    <li><i class="fas fa-check-circle"></i> Enfoque terapéutico personalizado (ej: TCC / Psicoanálisis).
+                    </li>
+                    <li><i class="fas fa-check-circle"></i> Espacio 100% confidencial y empático.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section class="services container section-padding" id="servicios">
+        <div class="section-header text-center fade-in">
+            <h2>¿Cómo puedo ayudarte?</h2>
+            <p>Espacios terapéuticos diseñados para cada etapa y necesidad.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card glass-card fade-up" style="transition-delay: 100ms;">
+                <div class="icon-wrapper">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3>Terapia Individual (Adultos)</h3>
+                <p>Un espacio a solas para trabajar la ansiedad, angustia, desarrollo personal o atravesar situaciones
+                    de duelo.</p>
+            </div>
+            <div class="service-card glass-card fade-up" style="transition-delay: 200ms;">
+                <div class="icon-wrapper">
+                    <i class="fas fa-child"></i>
+                </div>
+                <h3>Adolescentes y Jóvenes</h3>
+                <p>Acompañamiento especializado para transitar los cambios, desafíos y presiones de esta etapa vital.
+                </p>
+            </div>
+            <div class="service-card glass-card fade-up" style="transition-delay: 300ms;">
+                <div class="icon-wrapper">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <h3>Orientación Vocacional</h3>
+                <p>Herramientas y test para ayudarte a descubrir tu camino académico o profesional con seguridad.</p>
+            </div>
+            <div class="service-card glass-card fade-up" style="transition-delay: 400ms;">
+                <div class="icon-wrapper">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Gestión del Estrés y Ansiedad</h3>
+                <p>Técnicas prácticas y contención emocional para recuperar la calma en tu día a día.</p>
+            </div>
+        </div>
+        <div class="text-center mt-5 fade-in">
+            <button type="button" class="btn btn-secondary" onclick="openBookingModal('Terapia Individual')">
+                <i class="fas fa-calendar-plus"></i> Reservar una sesión
+            </button>
+        </div>
+    </section>
+
+    <!-- Horarios y Modalidad -->
+    <section class="info-section section-padding" id="info">
+        <div class="container container-sm text-center fade-in">
+            <h2>Mis Horarios y Modalidades</h2>
+            <p class="subtitle-text">Trabajo con turnos programados para garantizarte el tiempo y la atención que
+                merecés en cada sesión.</p>
+
+            <div class="info-cards">
+                <div class="info-card glass-card">
+                    <i class="far fa-clock info-icon"></i>
+                    <h3>Horarios</h3>
+                    <ul class="unstyled-list">
+                        <li><strong>Lunes a Viernes:</strong> 09:00 hs a 20:00 hs</li>
+                        <li><strong>Sábados:</strong> 09:00 hs a 13:00 hs</li>
+                    </ul>
+                </div>
+                <div class="info-card glass-card">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <h3>Modalidad</h3>
+                    <ul class="unstyled-list location-list">
+                        <li>
+                            <span class="pin">📍</span>
+                            <div>
+                                <strong>Presencial:</strong> Mi consultorio está en Palermo, Ciudad Autónoma de Buenos Aires.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="pin">💻</span>
+                            <div>
+                                <strong>Online:</strong> Por videollamada (Meet/Zoom/WhatsApp), estés donde estés.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials container section-padding" id="testimonios">
+        <div class="section-header text-center fade-in">
+            <h2>La experiencia de quienes ya dieron el primer paso</h2>
+            <p>Testimonios reales de pacientes que han pasado por mi consultorio.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card glass-card fade-up" style="transition-delay: 100ms;">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Dudé mucho antes de empezar terapia, pero Martín me hizo sentir súper cómoda desde el primer
+                    mensaje de WhatsApp. Es mi momento de paz en la semana."</p>
+                <div class="author">
+                    <div class="author-avatar"><i class="fas fa-user-circle"></i></div>
+                    <div class="author-info">
+                        <strong>Laura M.</strong>
+                        <span>Terapia Online</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card glass-card fade-up" style="transition-delay: 200ms;">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Excelente profesional. Fui por un tema de ansiedad laboral y me dio herramientas muy prácticas. Me
+                    transmitió mucha confianza."</p>
+                <div class="author">
+                    <div class="author-avatar"><i class="fas fa-user-circle"></i></div>
+                    <div class="author-info">
+                        <strong>Martín G.</strong>
+                        <span>Presencial</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card glass-card fade-up" style="transition-delay: 300ms;">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Empecé orientación vocacional porque estaba súper perdido con qué estudiar. La paciencia y claridad
+                    del Lic. Rossi me ayudaron un montón a decidirme."</p>
+                <div class="author">
+                    <div class="author-avatar"><i class="fas fa-user-circle"></i></div>
+                    <div class="author-info">
+                        <strong>Tomás F.</strong>
+                        <span>Orientación Vocacional</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Final -->
+    <section class="contact section-padding" id="contacto">
+        <div class="container contact-container glass-card fade-in">
+            <div class="contact-content">
+                <h2>¿Damos el primer paso juntos?</h2>
+                <p>Si sentís que es el momento de empezar a cuidarte, escribime. Te espero en mi consultorio en Palermo, CABA
+                    o desde la comodidad de tu casa si preferís la modalidad online.</p>
+
+                <div class="cta-wrapper mt-5">
+                    <button type="button" class="btn btn-primary btn-giant btn-whatsapp" onclick="openBookingModal()">
+                        <i class="fas fa-calendar-check"></i> Reservar mi primer turno
+                    </button>
+                    <p class="microcopy">Hacé clic, completá tus datos y asegurá tu espacio. Nos vemos pronto.</p>
+                </div>
+            </div>
+            <div class="contact-map" style="min-height: 300px; border-radius: 16px; overflow: hidden;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13139.73663673738!2d-58.4357732!3d-34.5805561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb59c771eb933%3A0x6b3113b596d78c69!2sPalermo%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" width="100%" height="100%" style="border:0; min-height: 300px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Lic. Martín Rossi. Todos los derechos reservados.</p>
+            <p class="footer-links">
+                Matrícula Nacional: 65432 | <a href="#">Términos y Privacidad</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Booking Modal (Stepper) -->
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-content glass-card stepper-modal">
+            <button type="button" class="close-modal" onclick="closeBookingModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <h3>Reservar un turno</h3>
+                <p>Completá los pasos para agendar tu consulta.</p>
+            </div>
+
+            <!-- Stepper Progress Bar -->
+            <div class="stepper-progress">
+                <div class="step active" data-step="1">1</div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2">2</div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3">3</div>
+                <div class="step-line"></div>
+                <div class="step" data-step="4">4</div>
+            </div>
+
+            <form id="bookingForm" class="booking-form stepper-form" novalidate>
+                
+                <!-- Paso 1 -->
+                <div class="step-content active" id="step-1">
+                    <h4 class="step-title"><i class="fas fa-user"></i> Datos Personales</h4>
+                    <div class="form-group">
+                        <label for="nombre_cliente">Nombre y Apellido *</label>
+                        <input type="text" id="nombre_cliente" name="nombre_cliente" required placeholder="Ej: Laura Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono_cliente">WhatsApp (uso de cód. de área) *</label>
+                        <input type="tel" id="telefono_cliente" name="telefono_cliente" required placeholder="Ej: +54 9 11 23456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="email_cliente">Correo Electrónico (Opcional)</label>
+                        <input type="email" id="email_cliente" name="email_cliente" placeholder="opcional@correo.com">
+                    </div>
+                    <div class="form-actions mt-buttons">
+                        <button type="button" class="btn btn-primary btn-next w-100" onclick="nextStep(1)">Siguiente <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="step-content" id="step-2">
+                    <h4 class="step-title"><i class="fas fa-list-ul"></i> Servicio y Modalidad</h4>
+                    <div class="form-group">
+                        <label for="servicio">Servicio *</label>
+                        <select id="servicio" name="servicio" required>
+                            <option value="">Seleccioná un servicio</option>
+                            <option value="Terapia Individual (Adultos)">Terapia Individual (Adultos)</option>
+                            <option value="Adolescentes y Jóvenes">Adolescentes y Jóvenes</option>
+                            <option value="Orientación Vocacional">Orientación Vocacional</option>
+                            <option value="Gestión del Estrés y Ansiedad">Gestión del Estrés y Ansiedad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalidad">Modalidad *</label>
+                        <select id="modalidad" name="modalidad" required>
+                            <option value="">Seleccioná una modalidad</option>
+                            <option value="Presencial">Presencial (Palermo)</option>
+                            <option value="Online">Online (Videollamada)</option>
+                        </select>
+                    </div>
+                    <div class="form-actions mt-buttons flex-between">
+                        <button type="button" class="btn btn-outline btn-prev" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Atrás</button>
+                        <button type="button" class="btn btn-primary btn-next" onclick="nextStep(2)">Siguiente <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="step-content" id="step-3">
+                    <h4 class="step-title"><i class="fas fa-calendar-day"></i> Fecha y Hora</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha_reserva">Día preferido *</label>
+                            <input type="date" id="fecha_reserva" name="fecha_reserva" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora_reserva">Horario disponible *</label>
+                            <select id="hora_reserva" name="hora_reserva" required disabled>
+                                <option value="">Primero selecciona un día</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions mt-buttons flex-between">
+                        <button type="button" class="btn btn-outline btn-prev" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Atrás</button>
+                        <button type="button" class="btn btn-primary btn-next" onclick="nextStep(3)">Siguiente <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="step-content" id="step-4">
+                    <h4 class="step-title"><i class="fas fa-comment-dots"></i> Detalles Finales</h4>
+                    <div class="form-group">
+                        <label for="mensaje">Motivo de consulta (opcional)</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contame un poco sobre lo que estás buscando trabajar..."></textarea>
+                    </div>
+                    <div class="form-actions mt-buttons flex-between">
+                        <button type="button" class="btn btn-outline btn-prev" onclick="prevStep(4)"><i class="fas fa-arrow-left"></i> Atrás</button>
+                        <button type="submit" class="btn btn-primary btn-submit btn-whatsapp"><i class="fas fa-paper-plane"></i> Confirmar Solicitud</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
