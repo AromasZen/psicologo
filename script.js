@@ -1,5 +1,5 @@
 function initScript() {
-    
+
     // Intersection Observer for Scroll Animations
     const observerOptions = {
         root: null,
@@ -36,7 +36,7 @@ function initScript() {
     // Mobile Menu Toggle (Basic implementation)
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    
+
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', () => {
             if (navLinks.style.display === 'flex') {
@@ -60,11 +60,11 @@ function initScript() {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                
+
                 // Close mobile menu if open
                 if (window.innerWidth <= 768 && navLinks.style.display === 'flex') {
                     navLinks.style.display = 'none';
@@ -104,7 +104,7 @@ function showStep(step) {
     document.querySelectorAll('.step-content').forEach(el => {
         el.classList.remove('active');
     });
-    
+
     // Actualiza los puntos de la barra de progreso
     document.querySelectorAll('.stepper-progress .step').forEach(el => {
         const stepNum = parseInt(el.getAttribute('data-step'));
@@ -132,13 +132,13 @@ function showStep(step) {
     }
 }
 
-window.nextStep = function(step) {
+window.nextStep = function (step) {
     const currentStepEl = document.getElementById(`step-${step}`);
     if (!currentStepEl) return;
-    
+
     const inputs = currentStepEl.querySelectorAll('input, select, textarea');
     let isValid = true;
-    
+
     for (let input of inputs) {
         if (!input.checkValidity()) {
             input.reportValidity();
@@ -153,17 +153,17 @@ window.nextStep = function(step) {
     }
 }
 
-window.prevStep = function(step) {
+window.prevStep = function (step) {
     if (step > 1) {
         currentStep = step - 1;
         showStep(currentStep);
     }
 }
 
-window.openBookingModal = function(servicioPreset = '') {
+window.openBookingModal = function (servicioPreset = '') {
     bookingModal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Prevent scrolling
-    
+
     // Reset Stepper
     currentStep = 1;
     showStep(1);
@@ -177,16 +177,16 @@ window.openBookingModal = function(servicioPreset = '') {
             }
         });
     }
-    
+
     // Reset Date/Time fields cleanly
     const horaReservaSelect = document.getElementById('hora_reserva');
-    if(horaReservaSelect) {
+    if (horaReservaSelect) {
         horaReservaSelect.innerHTML = '<option value="">Primero selecciona un día</option>';
         horaReservaSelect.disabled = true;
     }
 }
 
-window.closeBookingModal = function() {
+window.closeBookingModal = function () {
     bookingModal.classList.remove('active');
     document.body.style.overflow = 'auto'; // Re-enable scrolling
     bookingForm.reset();
@@ -213,7 +213,7 @@ if (fechaReservaInput && horaReservaSelect) {
     const todayStr = localISOTime.split('T')[0];
     fechaReservaInput.setAttribute('min', todayStr);
 
-    fechaReservaInput.addEventListener('change', async function() {
+    fechaReservaInput.addEventListener('change', async function () {
         const dateStr = this.value;
         if (!dateStr) {
             horaReservaSelect.innerHTML = '<option value="">Primero selecciona un día</option>';
@@ -222,8 +222,8 @@ if (fechaReservaInput && horaReservaSelect) {
         }
 
         const selectedDate = new Date(dateStr + 'T00:00:00');
-        const dayOfWeek = selectedDate.getDay(); 
-        
+        const dayOfWeek = selectedDate.getDay();
+
         if (dayOfWeek === 0) {
             Swal.fire('Día no disponible', 'Los domingos no hay atención. Por favor, selecciona otro día.', 'warning');
             this.value = '';
@@ -248,7 +248,7 @@ if (fechaReservaInput && horaReservaSelect) {
                 .select('hora_reserva')
                 .eq('empresa_id', EMPRESA_ID)
                 .eq('fecha_reserva', dateStr)
-                .neq('estado', 'Cancelado'); 
+                .neq('estado', 'Cancelado');
 
             if (error) throw error;
 
@@ -264,7 +264,7 @@ if (fechaReservaInput && horaReservaSelect) {
                 horaReservaSelect.innerHTML = '<option value="">Selepcioná una hora...</option>' + availableSlots.map(slot => `<option value="${slot}">${slot}</option>`).join('');
                 horaReservaSelect.disabled = false;
             }
-            
+
         } catch (error) {
             console.error(error);
             horaReservaSelect.innerHTML = '<option value="">Error al buscar horarios</option>';
@@ -275,7 +275,7 @@ if (fechaReservaInput && horaReservaSelect) {
 
 if (bookingForm) {
     // Prevent default Enter key behavior (which submits the form prematurely)
-    bookingForm.addEventListener('keydown', function(e) {
+    bookingForm.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
             e.preventDefault();
             const activeStep = document.querySelector('.step-content.active');
@@ -293,13 +293,13 @@ if (bookingForm) {
 
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         // Final validation check to avoid silent browser block on hidden required fields
         if (!bookingForm.checkValidity()) {
             bookingForm.reportValidity();
             return;
         }
-        
+
         const submitBtn = bookingForm.querySelector('.btn-submit');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
@@ -333,7 +333,7 @@ if (bookingForm) {
                 icon: 'success',
                 confirmButtonColor: '#25D366'
             });
-            
+
             closeBookingModal();
         } catch (error) {
             console.error('Error al guardar reserva:', error);
