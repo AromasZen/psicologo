@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS (Reusing existing styles and variables) -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Supabase SDK -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -44,8 +44,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .status-icon {
@@ -67,7 +74,9 @@
         }
 
         @keyframes spin {
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         h1 {
@@ -124,15 +133,21 @@
             z-index: -1;
             opacity: 0.6;
         }
+
         .blob-1 {
-            width: 400px; height: 400px;
+            width: 400px;
+            height: 400px;
             background: rgba(44, 82, 130, 0.3);
-            top: -100px; left: -100px;
+            top: -100px;
+            left: -100px;
         }
+
         .blob-2 {
-            width: 300px; height: 300px;
+            width: 300px;
+            height: 300px;
             background: rgba(44, 82, 130, 0.2);
-            bottom: -50px; right: -50px;
+            bottom: -50px;
+            right: -50px;
         }
     </style>
 </head>
@@ -146,7 +161,7 @@
         <i class="fas fa-spinner status-icon loading" id="status-icon"></i>
         <h1 id="status-title">Procesando...</h1>
         <p id="status-message">Estamos verificando tu turno. Por favor, esperá unos segundos.</p>
-        
+
         <div class="details-box" id="details-box" style="display: none;">
             <p><strong>📅 Fecha:</strong> <span id="res-fecha"></span></p>
             <p><strong>⏰ Hora:</strong> <span id="res-hora"></span></p>
@@ -161,7 +176,7 @@
         // Configuración de Supabase
         const SUPABASE_URL = 'https://nkkyyqqqusodhwqvprik.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ra3l5cXFxdXNvZGh3cXZwcmlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMjU1MDIsImV4cCI6MjA4ODYwMTUwMn0.Gs5bdRrv9HNViruVjr8mQl4Oh2Ei1Hyryr0vxpdPPhU';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         async function procesarConfirmacion() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -180,7 +195,7 @@
 
             try {
                 // Hacemos el UPDATE
-                const { data: updateData, error: updateError } = await supabase
+                const { data: updateData, error: updateError } = await db
                     .from('aareservas')
                     .update({ estado: 'Confirmado' })
                     .eq('confirmation_token', token)
@@ -200,12 +215,12 @@
                 icon.className = 'fas fa-check-circle status-icon success';
                 title.textContent = '¡Turno confirmado!';
                 message.textContent = '✅ Tu turno ha sido confirmado exitosamente. Nos vemos pronto.';
-                
+
                 document.getElementById('res-fecha').textContent = turno.fecha_reserva;
                 document.getElementById('res-hora').textContent = turno.hora_reserva;
                 document.getElementById('res-servicio').textContent = turno.servicio;
                 document.getElementById('res-modalidad').textContent = turno.modalidad;
-                
+
                 detailsBox.style.display = 'block';
                 btnHome.style.display = 'inline-block';
 
@@ -231,4 +246,5 @@
         document.addEventListener('DOMContentLoaded', procesarConfirmacion);
     </script>
 </body>
+
 </html>
