@@ -25,8 +25,12 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
 }
 
 body {
@@ -34,8 +38,6 @@ body {
     background-color: var(--bg-main);
     color: var(--text-color);
     line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
 }
 
 /* Typography elements */
@@ -134,6 +136,12 @@ img {
     right: -5vw;
     background: #E2E8F0;
     animation-delay: -6s;
+}
+
+@media (max-width: 768px) {
+    .blob-1 { width: 60vw; height: 60vw; top: -20vw; right: -20vw; }
+    .blob-2 { width: 50vw; height: 50vw; left: -25vw; }
+    .blob-3 { width: 40vw; height: 40vw; bottom: -10vw; right: -10vw; }
 }
 
 @keyframes float {
@@ -634,7 +642,29 @@ footer {
 
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* Hide on mobile properly in real app, simplified here */
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        gap: 1.5rem;
+        text-align: center;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     
     .mobile-menu-btn {
@@ -646,7 +676,64 @@ footer {
     }
     
     .hero-stats {
-        display: none; /* Hide for extreme mobile to keep clean */
+        display: none;
+    }
+
+    .section-padding {
+        padding: 4rem 0;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .btn-giant {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.85rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .stepper-progress {
+        padding: 0;
+    }
+
+    .step {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    .form-actions.flex-between {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .form-actions.flex-between .btn {
+        width: 100%;
+    }
+
+    .form-actions.flex-between .btn-prev {
+        order: 2;
+    }
+
+    .form-actions.flex-between .btn-next,
+    .form-actions.flex-between .btn-submit {
+        order: 1;
     }
 }
 
@@ -655,8 +742,8 @@ footer {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.4);
     z-index: 2000;
     display: flex;
